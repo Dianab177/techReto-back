@@ -4,7 +4,6 @@ import com.techreto.backend.model.Usuario;
 import com.techreto.backend.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -15,34 +14,35 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    // 🔹 Listar todos los usuarios
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> obtenerPorId(Long id) {
-        return usuarioRepository.findById(id);
+    // 🔹 Buscar usuario por ID
+    public Usuario findById(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }
 
+    // 🔹 Crear nuevo usuario
     public Usuario guardar(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
+    // 🔹 Actualizar usuario existente
     public Usuario actualizar(Long id, Usuario usuarioActualizado) {
-        Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
 
-        if (usuarioExistente.isPresent()) {
-            Usuario usuario = usuarioExistente.get();
-            usuario.setNombre(usuarioActualizado.getNombre());
-            usuario.setEmail(usuarioActualizado.getEmail());
-            usuario.setPassword(usuarioActualizado.getPassword());
-            usuario.setRol(usuarioActualizado.getRol());
-            return usuarioRepository.save(usuario);
-        } else {
-            throw new RuntimeException("Usuario no encontrado con ID: " + id);
-        }
+        usuario.setNombre(usuarioActualizado.getNombre());
+        usuario.setEmail(usuarioActualizado.getEmail());
+        usuario.setPassword(usuarioActualizado.getPassword());
+        usuario.setRol(usuarioActualizado.getRol());
+        return usuarioRepository.save(usuario);
     }
 
-
+    // 🔹 Eliminar usuario
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
     }

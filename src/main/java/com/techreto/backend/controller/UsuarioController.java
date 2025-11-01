@@ -23,8 +23,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuario> obtenerPorId(@PathVariable Long id) {
-        return usuarioService.obtenerPorId(id);
+    public Usuario obtenerPorId(@PathVariable Long id) {
+        return usuarioService.findById(id);
     }
 
     @PostMapping
