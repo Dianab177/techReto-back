@@ -4,6 +4,7 @@ import com.techreto.backend.model.MiembroEquipo;
 import com.techreto.backend.model.MiembroEquipoId;
 import com.techreto.backend.repository.MiembroEquipoRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -20,8 +21,14 @@ public class MiembroEquipoService {
         return miembroEquipoRepository.findAll();
     }
 
-    // ✅ Guardar miembro
+    // ✅ Guardar miembro (crea el id compuesto automáticamente)
     public MiembroEquipo guardar(MiembroEquipo miembro) {
+        if (miembro.getId() == null && miembro.getEquipo() != null && miembro.getUsuario() != null) {
+            miembro.setId(new MiembroEquipoId(
+                    miembro.getEquipo().getIdEquipo(),
+                    miembro.getUsuario().getIdUsuario()
+            ));
+        }
         return miembroEquipoRepository.save(miembro);
     }
 
@@ -32,14 +39,18 @@ public class MiembroEquipoService {
                 .orElseThrow(() -> new RuntimeException("Miembro no encontrado"));
     }
 
-    // ✅ Actualizar miembro (solo rol)
+    // ✅ Actualizar (por ejemplo, el rol)
     public MiembroEquipo actualizar(Long idEquipo, Long idUsuario, MiembroEquipo miembroDetalles) {
         MiembroEquipo miembro = obtenerPorId(idEquipo, idUsuario);
-        miembro.setRol(miembroDetalles.getRol());
+
+        if (miembroDetalles.getRol() != null) {
+            miembro.setRol(miembroDetalles.getRol());
+        }
+
         return miembroEquipoRepository.save(miembro);
     }
 
-    // ✅ Eliminar
+    // ✅ Eliminar miembro
     public void eliminar(Long idEquipo, Long idUsuario) {
         MiembroEquipoId id = new MiembroEquipoId(idEquipo, idUsuario);
         miembroEquipoRepository.deleteById(id);
