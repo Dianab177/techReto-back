@@ -14,32 +14,27 @@ public class EquipoService {
         this.equipoRepository = equipoRepository;
     }
 
-    // Listar todos los equipos
-    public List<Equipo> findAll() {
+    public List<Equipo> listar() {
         return equipoRepository.findAll();
     }
 
-    // Buscar por ID
-    public Equipo findById(Long id) {
+    public Equipo guardar(Equipo equipo) {
+        return equipoRepository.save(equipo);
+    }
+
+    public Equipo obtenerPorId(Long id) {
         return equipoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
     }
 
-    // Crear nuevo equipo
-    public Equipo save(Equipo equipo) {
+    public Equipo actualizar(Long id, Equipo detalles) {
+        Equipo equipo = obtenerPorId(id);
+        equipo.setNombre(detalles.getNombre());
+        equipo.setDescripcion(detalles.getDescripcion());
         return equipoRepository.save(equipo);
     }
 
-    // Actualizar equipo existente
-    public Equipo update(Long id, Equipo equipoDetalles) {
-        Equipo equipo = findById(id);
-        equipo.setNombre(equipoDetalles.getNombre());
-        equipo.setDescripcion(equipoDetalles.getDescripcion());
-        return equipoRepository.save(equipo);
-    }
-
-    // Eliminar equipo
-    public void delete(Long id) {
+    public void eliminar(Long id) {
         equipoRepository.deleteById(id);
     }
 }

@@ -18,31 +18,26 @@ public class RetoController {
 
     @GetMapping
     public List<Reto> listar() {
-        return retoService.findAll();
+        return retoService.listar();
     }
 
     @GetMapping("/{id}")
-    public Reto obtener(@PathVariable Long id) {
-        return retoService.findById(id);
+    public Reto obtenerPorId(@PathVariable Long id) {
+        return retoService.obtenerPorId(id);
     }
 
     @PostMapping
-    public Reto crear(@RequestBody Reto reto) {
-        return retoService.save(reto);
+    public Reto guardar(@RequestBody Reto reto) {
+        return retoService.guardar(reto);
     }
 
     @PutMapping("/{id}")
     public Reto actualizar(@PathVariable Long id, @RequestBody Reto reto) {
-        return retoService.update(id, reto);
+        return retoService.actualizar(id, reto);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
-        retoService.delete(id);
-    }
-
-    @GetMapping("/estado/{estado}")
-    public List<Reto> listarPorEstado(@PathVariable String estado) {
-        return retoService.findByEstado(estado);
+        retoService.eliminar(id);
     }
 }

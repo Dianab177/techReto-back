@@ -4,7 +4,6 @@ import com.techreto.backend.model.Usuario;
 import com.techreto.backend.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -19,16 +18,16 @@ public class UsuarioController {
 
     @GetMapping
     public List<Usuario> listar() {
-        return usuarioService.listarUsuarios();
+        return usuarioService.listar();
     }
 
     @GetMapping("/{id}")
     public Usuario obtenerPorId(@PathVariable Long id) {
-        return usuarioService.findById(id);
+        return usuarioService.obtenerPorId(id);
     }
 
     @PostMapping
-    public Usuario crear(@RequestBody Usuario usuario) {
+    public Usuario guardar(@RequestBody Usuario usuario) {
         return usuarioService.guardar(usuario);
     }
 

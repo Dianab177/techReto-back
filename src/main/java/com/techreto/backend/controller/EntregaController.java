@@ -21,6 +21,11 @@ public class EntregaController {
         return entregaService.listar();
     }
 
+    @GetMapping("/{id}")
+    public Entrega obtenerPorId(@PathVariable Long id) {
+        return entregaService.obtenerPorId(id);
+    }
+
     @PostMapping
     public Entrega guardar(@RequestBody Entrega entrega) {
         return entregaService.guardar(entrega);
@@ -35,14 +40,4 @@ public class EntregaController {
     public void eliminar(@PathVariable Long id) {
         entregaService.eliminar(id);
     }
-
-    @GetMapping("/inscripcion/{idInscripcion}")
-    public List<Entrega> listarPorInscripcion(@PathVariable Long idInscripcion) {
-        return entregaService.listarPorInscripcion(idInscripcion);
-    }
-    @GetMapping("/{id}")
-    public Entrega obtenerPorId(@PathVariable Long id) {
-        return entregaService.buscarPorId(id);
-    }
-
 }

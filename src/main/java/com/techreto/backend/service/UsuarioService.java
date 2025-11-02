@@ -14,35 +14,28 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // 🔹 Listar todos los usuarios
-    public List<Usuario> listarUsuarios() {
+    public List<Usuario> listar() {
         return usuarioRepository.findAll();
     }
 
-    // 🔹 Buscar usuario por ID
-    public Usuario findById(Long id) {
-        return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
-    }
-
-    // 🔹 Crear nuevo usuario
     public Usuario guardar(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    // 🔹 Actualizar usuario existente
-    public Usuario actualizar(Long id, Usuario usuarioActualizado) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+    public Usuario obtenerPorId(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
 
-        usuario.setNombre(usuarioActualizado.getNombre());
-        usuario.setEmail(usuarioActualizado.getEmail());
-        usuario.setPassword(usuarioActualizado.getPassword());
-        usuario.setRol(usuarioActualizado.getRol());
+    public Usuario actualizar(Long id, Usuario detalles) {
+        Usuario usuario = obtenerPorId(id);
+        usuario.setNombre(detalles.getNombre());
+        usuario.setEmail(detalles.getEmail());
+        usuario.setPassword(detalles.getPassword());
+        usuario.setRol(detalles.getRol());
         return usuarioRepository.save(usuario);
     }
 
-    // 🔹 Eliminar usuario
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
     }

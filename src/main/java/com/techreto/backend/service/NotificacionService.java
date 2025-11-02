@@ -18,8 +18,8 @@ public class NotificacionService {
         return notificacionRepository.findAll();
     }
 
-    public List<Notificacion> listarPorUsuario(Long idUsuario) {
-        return notificacionRepository.findByUsuario_IdUsuario(idUsuario);
+    public Notificacion guardar(Notificacion notificacion) {
+        return notificacionRepository.save(notificacion);
     }
 
     public Notificacion obtenerPorId(Long id) {
@@ -27,15 +27,10 @@ public class NotificacionService {
                 .orElseThrow(() -> new RuntimeException("Notificación no encontrada"));
     }
 
-    public Notificacion guardar(Notificacion notificacion) {
-        return notificacionRepository.save(notificacion);
-    }
-
-    public Notificacion actualizar(Long id, Notificacion notificacionDetalles) {
+    public Notificacion actualizar(Long id, Notificacion detalles) {
         Notificacion n = obtenerPorId(id);
-        if (notificacionDetalles.getMensaje() != null)
-            n.setMensaje(notificacionDetalles.getMensaje());
-        n.setLeida(notificacionDetalles.isLeida());
+        n.setMensaje(detalles.getMensaje());
+        n.setLeida(detalles.isLeida());
         return notificacionRepository.save(n);
     }
 

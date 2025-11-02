@@ -3,7 +3,6 @@ package com.techreto.backend.controller;
 import com.techreto.backend.model.Equipo;
 import com.techreto.backend.service.EquipoService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,28 +16,33 @@ public class EquipoController {
         this.equipoService = equipoService;
     }
 
+    // 🔹 Listar todos los equipos
     @GetMapping
     public List<Equipo> listar() {
-        return equipoService.findAll();
+        return equipoService.listar();
     }
 
+    // 🔹 Obtener equipo por ID
     @GetMapping("/{id}")
     public Equipo obtenerPorId(@PathVariable Long id) {
-        return equipoService.findById(id);
+        return equipoService.obtenerPorId(id);
     }
 
+    // 🔹 Crear nuevo equipo
     @PostMapping
-    public Equipo crear(@RequestBody Equipo equipo) {
-        return equipoService.save(equipo);
+    public Equipo guardar(@RequestBody Equipo equipo) {
+        return equipoService.guardar(equipo);
     }
 
+    // 🔹 Actualizar equipo existente
     @PutMapping("/{id}")
-    public Equipo actualizar(@PathVariable Long id, @RequestBody Equipo equipo) {
-        return equipoService.update(id, equipo);
+    public Equipo actualizar(@PathVariable Long id, @RequestBody Equipo detalles) {
+        return equipoService.actualizar(id, detalles);
     }
 
+    // 🔹 Eliminar equipo por ID
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
-        equipoService.delete(id);
+        equipoService.eliminar(id);
     }
 }
