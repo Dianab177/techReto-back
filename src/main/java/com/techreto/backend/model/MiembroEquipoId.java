@@ -1,5 +1,6 @@
 package com.techreto.backend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +13,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class MiembroEquipoId implements Serializable {
 
+    @Column(name = "id_equipo")
     private Long idEquipo;
+
+    @Column(name = "id_usuario")
     private Long idUsuario;
 
-    // ✅ Imprescindible para que Hibernate compare bien las claves
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

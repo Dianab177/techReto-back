@@ -15,34 +15,32 @@ public class MiembroEquipoService {
         this.miembroEquipoRepository = miembroEquipoRepository;
     }
 
-    // ✅ Listar todos los miembros
+    // ✅ Listar todos
     public List<MiembroEquipo> listar() {
         return miembroEquipoRepository.findAll();
     }
 
-    // ✅ Buscar por id compuesto (equipo + usuario)
-    public MiembroEquipo findById(Long idEquipo, Long idUsuario) {
+    // ✅ Guardar miembro
+    public MiembroEquipo guardar(MiembroEquipo miembro) {
+        return miembroEquipoRepository.save(miembro);
+    }
+
+    // ✅ Buscar por id compuesto
+    public MiembroEquipo obtenerPorId(Long idEquipo, Long idUsuario) {
         MiembroEquipoId id = new MiembroEquipoId(idEquipo, idUsuario);
         return miembroEquipoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Miembro no encontrado"));
     }
 
-    // ✅ Crear o actualizar un miembro
-    public MiembroEquipo save(MiembroEquipo miembro) {
+    // ✅ Actualizar miembro (solo rol)
+    public MiembroEquipo actualizar(Long idEquipo, Long idUsuario, MiembroEquipo miembroDetalles) {
+        MiembroEquipo miembro = obtenerPorId(idEquipo, idUsuario);
+        miembro.setRol(miembroDetalles.getRol());
         return miembroEquipoRepository.save(miembro);
     }
 
-    // ✅ Actualizar datos de un miembro existente
-    // ✅ Actualizar datos de un miembro existente
-    public MiembroEquipo update(Long idEquipo, Long idUsuario, MiembroEquipo miembroDetalles) {
-        MiembroEquipo miembro = findById(idEquipo, idUsuario);
-        // Si más adelante agregas otros campos editables, los actualizarás aquí
-        return miembroEquipoRepository.save(miembro);
-    }
-
-
-    // ✅ Eliminar miembro
-    public void delete(Long idEquipo, Long idUsuario) {
+    // ✅ Eliminar
+    public void eliminar(Long idEquipo, Long idUsuario) {
         MiembroEquipoId id = new MiembroEquipoId(idEquipo, idUsuario);
         miembroEquipoRepository.deleteById(id);
     }

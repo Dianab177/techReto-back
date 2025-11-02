@@ -23,24 +23,23 @@ public class MiembroEquipoController {
 
     @GetMapping("/{idEquipo}/{idUsuario}")
     public MiembroEquipo obtenerPorId(@PathVariable Long idEquipo, @PathVariable Long idUsuario) {
-        return miembroEquipoService.findById(idEquipo, idUsuario);
+        return miembroEquipoService.obtenerPorId(idEquipo, idUsuario);
     }
 
     @PostMapping
     public MiembroEquipo agregar(@RequestBody MiembroEquipo miembro) {
-        return miembroEquipoService.save(miembro);
+        return miembroEquipoService.guardar(miembro);
     }
 
     @PutMapping("/{idEquipo}/{idUsuario}")
-    public MiembroEquipo actualizar(
-            @PathVariable Long idEquipo,
-            @PathVariable Long idUsuario,
-            @RequestBody MiembroEquipo miembro) {
-        return miembroEquipoService.update(idEquipo, idUsuario, miembro);
+    public MiembroEquipo actualizar(@PathVariable Long idEquipo,
+                                    @PathVariable Long idUsuario,
+                                    @RequestBody MiembroEquipo miembro) {
+        return miembroEquipoService.actualizar(idEquipo, idUsuario, miembro);
     }
 
     @DeleteMapping("/{idEquipo}/{idUsuario}")
     public void eliminar(@PathVariable Long idEquipo, @PathVariable Long idUsuario) {
-        miembroEquipoService.delete(idEquipo, idUsuario);
+        miembroEquipoService.eliminar(idEquipo, idUsuario);
     }
 }
