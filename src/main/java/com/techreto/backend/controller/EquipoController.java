@@ -16,31 +16,30 @@ public class EquipoController {
         this.equipoService = equipoService;
     }
 
-    // 🔹 Listar todos los equipos
     @GetMapping
     public List<Equipo> listar() {
         return equipoService.listar();
     }
 
-    // 🔹 Obtener equipo por ID
+
     @GetMapping("/{id}")
     public Equipo obtenerPorId(@PathVariable Long id) {
         return equipoService.obtenerPorId(id);
     }
 
-    // 🔹 Crear nuevo equipo
+
     @PostMapping
     public Equipo guardar(@RequestBody Equipo equipo) {
         return equipoService.guardar(equipo);
     }
 
-    // 🔹 Actualizar equipo existente
+
     @PutMapping("/{id}")
     public Equipo actualizar(@PathVariable Long id, @RequestBody Equipo detalles) {
         return equipoService.actualizar(id, detalles);
     }
 
-    // 🔹 Eliminar equipo por ID
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         equipoService.eliminar(id);

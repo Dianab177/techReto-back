@@ -41,7 +41,7 @@ public class UsuarioController {
         usuarioService.eliminar(id);
     }
 
-    // 🔹 LOGIN
+
     @PostMapping("/login")
     public Usuario login(@RequestBody Usuario usuario) {
         Usuario encontrado = usuarioService.obtenerPorEmail(usuario.getEmail());

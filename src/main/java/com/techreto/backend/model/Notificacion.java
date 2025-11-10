@@ -11,7 +11,7 @@ public class Notificacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_notificacion") // 🔥 Importante: coincide con la BD
+    @Column(name = "id_notificacion")
     private Long idNotificacion;
 
     @ManyToOne

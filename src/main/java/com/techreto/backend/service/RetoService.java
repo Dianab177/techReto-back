@@ -19,8 +19,12 @@ public class RetoService {
     }
 
     public Reto guardar(Reto reto) {
+        if (reto.getEmpresa() == null || reto.getEmpresa().getIdUsuario() == null) {
+            throw new IllegalArgumentException("Debe especificarse una empresa válida para el reto");
+        }
         return retoRepository.save(reto);
     }
+
 
     public Reto obtenerPorId(Long id) {
         return retoRepository.findById(id)

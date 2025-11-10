@@ -16,25 +16,25 @@ public class MiembroEquipoController {
         this.miembroEquipoService = miembroEquipoService;
     }
 
-    // ✅ Listar todos los miembros
+
     @GetMapping
     public List<MiembroEquipo> listar() {
         return miembroEquipoService.listar();
     }
 
-    // ✅ Obtener miembro por ID compuesto (id_equipo + id_usuario)
+
     @GetMapping("/{idEquipo}/{idUsuario}")
     public MiembroEquipo obtenerPorId(@PathVariable Long idEquipo, @PathVariable Long idUsuario) {
         return miembroEquipoService.obtenerPorId(idEquipo, idUsuario);
     }
 
-    // ✅ Crear nuevo miembro
+
     @PostMapping
     public MiembroEquipo agregar(@RequestBody MiembroEquipo miembro) {
         return miembroEquipoService.guardar(miembro);
     }
 
-    // ✅ Actualizar miembro existente (por ejemplo, rol)
+
     @PutMapping("/{idEquipo}/{idUsuario}")
     public MiembroEquipo actualizar(
             @PathVariable Long idEquipo,
@@ -43,7 +43,7 @@ public class MiembroEquipoController {
         return miembroEquipoService.actualizar(idEquipo, idUsuario, miembro);
     }
 
-    // ✅ Eliminar miembro
+
     @DeleteMapping("/{idEquipo}/{idUsuario}")
     public void eliminar(@PathVariable Long idEquipo, @PathVariable Long idUsuario) {
         miembroEquipoService.eliminar(idEquipo, idUsuario);

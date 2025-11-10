@@ -22,7 +22,7 @@ public class Reto {
     private String tipo;
 
     @Column(length = 50)
-    private String estado; // BORRADOR, PUBLICADO, CERRADO
+    private String estado;
 
     private String recompensa;
 
