@@ -18,6 +18,11 @@ public class InscripcionService {
         return inscripcionRepository.findAll();
     }
 
+    public List<Inscripcion> listarPorUsuario(Long idUsuario) {
+        return inscripcionRepository.findByUsuario_IdUsuario(idUsuario);
+    }
+
+
     public Inscripcion guardar(Inscripcion inscripcion) {
         return inscripcionRepository.save(inscripcion);
     }

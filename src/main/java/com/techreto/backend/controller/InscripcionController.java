@@ -79,6 +79,16 @@ public class InscripcionController {
         return inscripcionService.actualizar(id, inscripcion);
     }
 
+    @GetMapping("/usuario/{idUsuario}")
+    public List<Inscripcion> listarPorUsuario(@PathVariable Long idUsuario) {
+        return inscripcionService.listarPorUsuario(idUsuario);
+    }
+
+    @GetMapping("/reto/{idReto}")
+    public List<Inscripcion> obtenerPorReto(@PathVariable Long idReto) {
+        return inscripcionRepository.findByReto_IdReto(idReto);
+    }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         inscripcionService.eliminar(id);
