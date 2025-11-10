@@ -3,11 +3,11 @@ package com.techreto.backend.controller;
 import com.techreto.backend.model.Usuario;
 import com.techreto.backend.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@CrossOrigin(origins = "*")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -39,5 +39,21 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         usuarioService.eliminar(id);
+    }
+
+    // 🔹 LOGIN
+    @PostMapping("/login")
+    public Usuario login(@RequestBody Usuario usuario) {
+        Usuario encontrado = usuarioService.obtenerPorEmail(usuario.getEmail());
+
+        if (encontrado == null) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+
+        if (!encontrado.getPassword().equals(usuario.getPassword())) {
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+
+        return encontrado;
     }
 }
