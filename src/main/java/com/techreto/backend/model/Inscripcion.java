@@ -31,4 +31,7 @@ public class Inscripcion {
 
     @Column(name = "estado", length = 20)
     private String estado = "PENDIENTE";
+
+    @Column(name = "oculto")
+    private boolean oculto = false;
 }

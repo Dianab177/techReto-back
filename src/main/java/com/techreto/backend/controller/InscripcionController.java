@@ -42,7 +42,6 @@ public class InscripcionController {
 
     @PostMapping
     public ResponseEntity<?> inscribirse(@RequestBody InscripcionRequest request) {
-        System.out.println("📥 Recibido en backend: idUsuario=" + request.getIdUsuario() + ", idReto=" + request.getIdReto());
 
         Usuario usuario = usuarioRepository.findById(request.getIdUsuario())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -55,18 +54,14 @@ public class InscripcionController {
                 .isPresent();
 
         if (yaInscrito) {
-            return ResponseEntity.badRequest().body("El usuario ya está inscrito en este reto.");
+            return ResponseEntity.badRequest().body("El usuario ya está inscrito");
         }
 
         Inscripcion inscripcion = new Inscripcion();
         inscripcion.setUsuario(usuario);
         inscripcion.setReto(reto);
-        inscripcion.setEstado("PENDIENTE");
 
-        Inscripcion nueva = inscripcionService.guardar(inscripcion);
-        System.out.println("✅ Inscripción creada con éxito: ID " + nueva.getIdInscripcion());
-
-        return ResponseEntity.ok(nueva);
+        return ResponseEntity.ok(inscripcionService.guardar(inscripcion));
     }
 
     @GetMapping("/{id}")
@@ -92,5 +87,11 @@ public class InscripcionController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         inscripcionService.eliminar(id);
+    }
+
+    @PutMapping("/{id}/ocultar")
+    public ResponseEntity<?> ocultar(@PathVariable Long id) {
+        Inscripcion i = inscripcionService.ocultar(id);
+        return ResponseEntity.ok(i);
     }
 }

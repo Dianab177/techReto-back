@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RetoRepository extends JpaRepository<Reto, Long> {
     List<Reto> findByEstado(String estado);
+    List<Reto> findByEmpresaIdUsuario(Long idUsuario);
+
 }
