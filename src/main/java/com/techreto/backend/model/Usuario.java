@@ -24,4 +24,9 @@ public class Usuario {
 
     @Column(length = 50)
     private String rol;
+
+    @Column(length = 500)
+    private String competencias;
 }
+
+

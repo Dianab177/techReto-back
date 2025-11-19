@@ -32,12 +32,16 @@ public class Reto {
     @Column(name = "fecha_fin")
     private LocalDate fechaFin;
 
-    // Relación con Usuario (empresa creadora)
+    // 👇 NUEVO: campo para bloquear retos
+    @Column(name = "bloqueado", nullable = false)
+    private boolean bloqueado = false;
+
     @ManyToOne
     @JoinColumn(name = "id_empresa", nullable = false)
     private Usuario empresa;
 
-    // Getters y Setters
+    // getters y setters...
+
     public Long getIdReto() { return idReto; }
     public void setIdReto(Long idReto) { this.idReto = idReto; }
 
@@ -64,4 +68,7 @@ public class Reto {
 
     public Usuario getEmpresa() { return empresa; }
     public void setEmpresa(Usuario empresa) { this.empresa = empresa; }
+
+    public boolean isBloqueado() { return bloqueado; }
+    public void setBloqueado(boolean bloqueado) { this.bloqueado = bloqueado; }
 }

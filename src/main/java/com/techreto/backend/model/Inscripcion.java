@@ -1,5 +1,6 @@
 package com.techreto.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -16,6 +17,8 @@ public class Inscripcion {
 
     @ManyToOne
     @JoinColumn(name = "id_reto", nullable = false)
+    // 🔹 Cuando serializamos la Inscripcion, del Reto se ignora la propiedad "inscripciones"
+    @JsonIgnoreProperties("inscripciones")
     private Reto reto;
 
     @ManyToOne
