@@ -37,4 +37,20 @@ public class Inscripcion {
 
     @Column(name = "oculto")
     private boolean oculto = false;
+    @Column(length = 300)
+    private String enlaceRepositorio;
+
+    @Column(length = 300)
+    private String enlaceFigma;
+
+    @Column(length = 300)
+    private String enlaceDemo;
+
+    @Column(length = 20)
+    private String estadoEntrega; // PENDIENTE - ENTREGADO
+
+    @Column(length = 20)
+    private String estadoAprobacion; // PENDIENTE - APROBADO - RECHAZADO
+
+
 }

@@ -33,10 +33,33 @@ public class InscripcionService {
     }
 
     public Inscripcion actualizar(Long id, Inscripcion detalles) {
+
         Inscripcion inscripcion = obtenerPorId(id);
-        inscripcion.setEstado(detalles.getEstado());
+
+        // Estado entrega
+        if (detalles.getEstadoEntrega() != null) {
+            inscripcion.setEstadoEntrega(detalles.getEstadoEntrega());
+        }
+
+        // Estado aprobación
+        if (detalles.getEstadoAprobacion() != null) {
+            inscripcion.setEstadoAprobacion(detalles.getEstadoAprobacion());
+        }
+
+        // Enlaces
+        if (detalles.getEnlaceRepositorio() != null) {
+            inscripcion.setEnlaceRepositorio(detalles.getEnlaceRepositorio());
+        }
+        if (detalles.getEnlaceFigma() != null) {
+            inscripcion.setEnlaceFigma(detalles.getEnlaceFigma());
+        }
+        if (detalles.getEnlaceDemo() != null) {
+            inscripcion.setEnlaceDemo(detalles.getEnlaceDemo());
+        }
+
         return inscripcionRepository.save(inscripcion);
     }
+
 
     public void eliminar(Long id) {
         inscripcionRepository.deleteById(id);

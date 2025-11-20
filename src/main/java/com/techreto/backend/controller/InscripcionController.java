@@ -10,8 +10,10 @@ import com.techreto.backend.repository.UsuarioRepository;
 import com.techreto.backend.service.InscripcionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.techreto.backend.dto.EntregaDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/inscripciones")
@@ -94,4 +96,28 @@ public class InscripcionController {
         Inscripcion i = inscripcionService.ocultar(id);
         return ResponseEntity.ok(i);
     }
+
+    @PutMapping("/{id}/entregar")
+    public ResponseEntity<?> entregarReto(
+            @PathVariable Long id,
+            @RequestBody EntregaDTO entregaDTO
+    ) {
+        Optional<Inscripcion> optional = inscripcionRepository.findById(id);
+        if (optional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Inscripcion inscripcion = optional.get();
+
+        inscripcion.setEnlaceRepositorio(entregaDTO.getEnlaceRepositorio());
+        inscripcion.setEnlaceFigma(entregaDTO.getEnlaceFigma());
+        inscripcion.setEnlaceDemo(entregaDTO.getEnlaceDemo());
+        inscripcion.setEstadoEntrega("ENTREGADO");
+
+        inscripcionRepository.save(inscripcion);
+
+        return ResponseEntity.ok("Entrega realizada con éxito");
+    }
+
+
 }
