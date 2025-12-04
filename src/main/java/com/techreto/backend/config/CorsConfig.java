@@ -17,7 +17,7 @@ public class CorsConfig {
                         .allowedOrigins("http://localhost:5173") // solo React
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowCredentials(false); // ❌ sin cookies
+                        .allowCredentials(false); //sin cookies
             }
         };
     }
