@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class CorsConfig {
+public class WebConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -14,10 +14,13 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173") // solo React
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedOrigins(
+                                "http://localhost:5173",
+                                "https://techreto.netlify.app"
+                        )
+                        .allowedMethods("GET","POST","PUT","DELETE","PATCH")
                         .allowedHeaders("*")
-                        .allowCredentials(false); //sin cookies
+                        .allowCredentials(true);
             }
         };
     }
