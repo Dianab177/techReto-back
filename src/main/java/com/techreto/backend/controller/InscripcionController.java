@@ -96,6 +96,11 @@ public class InscripcionController {
         Inscripcion i = inscripcionService.ocultar(id);
         return ResponseEntity.ok(i);
     }
+    @GetMapping("/admin/todas")
+    public List<Inscripcion> listarTodas() {
+        return inscripcionService.listar();
+    }
+
 
     @PutMapping("/{id}/entregar")
     public ResponseEntity<?> entregarReto(
@@ -118,6 +123,7 @@ public class InscripcionController {
 
         return ResponseEntity.ok("Entrega realizada con éxito");
     }
+    
 
 
 }
